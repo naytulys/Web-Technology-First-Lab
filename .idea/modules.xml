@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JUnitTests/JUnitTests.iml" filepath="$PROJECT_DIR$/JUnitTests/JUnitTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web-Technology-First-Lab.iml" filepath="$PROJECT_DIR$/Web-Technology-First-Lab.iml" />
       <module fileurl="file://$PROJECT_DIR$/task_1/task_1.iml" filepath="$PROJECT_DIR$/task_1/task_1.iml" />
       <module fileurl="file://$PROJECT_DIR$/task_10-11/task_10-11.iml" filepath="$PROJECT_DIR$/task_10-11/task_10-11.iml" />
