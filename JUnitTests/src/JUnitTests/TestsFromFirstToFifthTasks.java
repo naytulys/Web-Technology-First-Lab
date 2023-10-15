@@ -1,9 +1,13 @@
 package JUnitTests;
 
 import calculator.ExpressionCalculator;
+import calculator.FunctionCalculator;
 import check.PointChecker;
 import entity.Point;
 import org.junit.Test;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,7 +34,8 @@ public class TestsFromFirstToFifthTasks {
         }
         for (int i = 0; i < actualResults.length; i++) {
             double substract = actualResults[i] - expectedResults[i];
-            result = result && Double.compare(substract, 0.001) <= 0;
+            substract = Math.abs(substract);
+            result = result && Double.compare(substract, 10e-4) <= 0;
         }
         assertTrue("Math Expression Task1 failed", result);
     }
@@ -66,9 +71,67 @@ public class TestsFromFirstToFifthTasks {
             actualResults[i] = pointChecker.checkArea(points[i]);
         }
         boolean result = true;
-        for (int i = 0; i < actualResults.length; i++){
+        for (int i = 0; i < actualResults.length; i++) {
             result = result && actualResults[i].equals(expectedResults[i]);
         }
         assertTrue("PointInArea Task 2 failed", result);
     }
+
+    @Test(timeout = 2000)
+    public void tangentFunctionByStepsTask3FirstTest() throws Exception {
+        final Map<Double, Double> expectedResults = new LinkedHashMap<>() {
+            {
+                put(0.0, 0.0000);
+                put(0.5, 0.5463);
+                put(1.0, 1.5574);
+            }
+        };
+        int result = 0;
+        Map<Double, Double> actualResults = FunctionCalculator.calculate(0.0, 1.0, 0.5);
+        for (Map.Entry<Double, Double> entry : expectedResults.entrySet()) {
+            if (!actualResults.containsKey(entry.getKey())) {
+                result = -1;
+                break;
+            }
+            double substract = actualResults.get(entry.getKey()) - entry.getValue();
+            substract = Math.abs(substract);
+            if (Double.compare(substract, 10e-4) > 0){
+                result = -2;
+            }
+        }
+        assertTrue("tangent Function By Steps Task 3 First failed actual Map doesnt contains key from expected Map", result != -1);
+        assertTrue("tangent Function By Steps Task 3 First failed value by key from actual Map doesnt equal value by the same key from expected Map", result != -2);
+        assertTrue("tangent Function By Steps Task 3 failed", result == 0);
+    }
+
+
+    @Test(timeout = 2000)
+    public void tangentFunctionByStepsTask3SecondTest() throws Exception {
+        final Map<Double, Double> expectedResults = new LinkedHashMap<>() {
+            {
+                put(0.0, 0.0000);
+                put(1.0, 1.5574);
+                put(2.0, -2.1850);
+                put(3.0, -0.1425);
+                put(4.0, 1.1578);
+            }
+        };
+        int result = 0;
+        Map<Double, Double> actualResults = FunctionCalculator.calculate(0.0, 4.0, 1.0);
+        for (Map.Entry<Double, Double> entry : expectedResults.entrySet()) {
+            if (!actualResults.containsKey(entry.getKey())) {
+                result = -1;
+                break;
+            }
+            double substract = actualResults.get(entry.getKey()) - entry.getValue();
+            substract = Math.abs(substract);
+            if (Double.compare(substract, 10e-4) > 0){
+                result = -2;
+            }
+        }
+        assertTrue("tangent Function By Steps Task 3 failed actual Map doesnt contains key from expected Map", result != -1);
+        assertTrue("tangent Function By Steps Task 3 failed value by key from actual Map doesnt equal value by the same key from expected Map", result != -2);
+        assertTrue("tangent Function By Steps Task 3 failed", result == 0);
+    }
+
 }
