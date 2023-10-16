@@ -4,6 +4,9 @@ import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
 import check.PrimeChecker;
+import entity.Ball;
+import entity.BallsColors;
+import entity.BasketOfBalls;
 import entity.Point;
 import generation.MatrixGenerator;
 import org.junit.Test;
@@ -200,5 +203,26 @@ public class TestsFromFirstToFifthTasks {
         CustomSortingAlgorithm.sort(inputArray);
         boolean result = Arrays.toString(inputArray).equals(Arrays.toString(expectedResults));
         assertTrue("Custom Sorting Algorithm Task 7 failed", result);
+    }
+
+    @Test(timeout = 2000)
+    public void CustomSortingAlgorithmTask9() throws Exception {
+        BasketOfBalls basketOfBalls = new BasketOfBalls();
+        basketOfBalls.addBallInBasket(new Ball(3.5, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(1.1, BallsColors.RED));
+        basketOfBalls.addBallInBasket(new Ball(2.2, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(9.4, BallsColors.BROWN));
+        basketOfBalls.addBallInBasket(new Ball(7.2, BallsColors.WHITE));
+        basketOfBalls.addBallInBasket(new Ball(0.5, BallsColors.GREEN));
+        basketOfBalls.addBallInBasket(new Ball(5.0, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(5.5, BallsColors.BLACK));
+        basketOfBalls.addBallInBasket(new Ball(6.4, BallsColors.BLUE));
+        final double expectedBasketWeight = 40.8;
+        final int expectedBlueBallsCount = 4;
+        double actualBasketWeight = basketOfBalls.basketWeight();
+        int actualBlueBallsCount = basketOfBalls.blueBallsInBasketAmount();
+        assertTrue("Custom Sorting Algorithm Task 9 failed",
+                Double.compare(expectedBasketWeight, actualBasketWeight) == 0 &&
+                        Integer.compare(expectedBlueBallsCount, actualBlueBallsCount) == 0);
     }
 }
