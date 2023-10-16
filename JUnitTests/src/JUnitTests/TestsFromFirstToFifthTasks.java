@@ -7,11 +7,9 @@ import check.PrimeChecker;
 import entity.Point;
 import generation.MatrixGenerator;
 import org.junit.Test;
+import sort.CustomSortingAlgorithm;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -189,5 +187,19 @@ public class TestsFromFirstToFifthTasks {
         double[][] actualResults = MatrixGenerator.generateMatrix(inputArray);
         assertArrayEquals("Square Matrix Where Rows Is Array Left Circle Shift Task 6 failed", expectedResults, actualResults);
 
+    }
+
+    @Test(timeout = 2000)
+    public void CustomSortingAlgorithmTask7() throws Exception {
+        final double[] inputArray = new double[]{
+                1.0, 4.0, 7.0, 2.0, 5.0, 9.0, 10.0, 3.0, 15.0
+        };
+        final double[] expectedResults = new double[]{
+                1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 10.0, 15.0
+        };
+        double[] actualResults = CustomSortingAlgorithm.sort(inputArray);
+        System.out.println(Arrays.toString(actualResults));
+        boolean result = Arrays.toString(actualResults).equals(Arrays.toString(expectedResults));
+        assertTrue("Custom Sorting Algorithm Task 7 failed", result);
     }
 }
