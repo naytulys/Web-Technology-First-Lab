@@ -5,6 +5,7 @@ import calculator.FunctionCalculator;
 import check.PointChecker;
 import check.PrimeChecker;
 import entity.Point;
+import generation.MatrixGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -168,6 +169,25 @@ public class TestsFromFirstToFifthTasks {
         };
         List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
         assertArrayEquals("primes Positions In Array Task 4 Second Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
+
+    @Test(timeout = 2000)
+    public void SquareMatrixWhereRowsIsArrayLeftCircleShiftTask6() throws Exception {
+        final double[] inputArray = new double[]{
+                1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0
+        };
+        final double[][] expectedResults = new double[][]{
+                {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                {2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 1.0},
+                {3.0, 4.0, 5.0, 6.0, 7.0, 1.0, 2.0},
+                {4.0, 5.0, 6.0, 7.0, 1.0, 2.0, 3.0},
+                {5.0, 6.0, 7.0, 1.0, 2.0, 3.0, 4.0},
+                {6.0, 7.0, 1.0, 2.0, 3.0, 4.0, 5.0},
+                {7.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0},
+        };
+        double[][] actualResults = MatrixGenerator.generateMatrix(inputArray);
+        assertArrayEquals("Square Matrix Where Rows Is Array Left Circle Shift Task 6 failed", expectedResults, actualResults);
 
     }
 }
