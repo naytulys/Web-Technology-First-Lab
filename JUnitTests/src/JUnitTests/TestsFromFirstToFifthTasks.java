@@ -11,6 +11,7 @@ import entity.Point;
 import generation.MatrixGenerator;
 import merge.IncreaseSequencesMerger;
 import org.junit.Test;
+import search.LongestIncreasingSubsequence;
 import sort.CustomSortingAlgorithm;
 
 import java.util.*;
@@ -171,6 +172,28 @@ public class TestsFromFirstToFifthTasks {
         };
         List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
         assertArrayEquals("primes Positions In Array Task 4 Second Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
+
+    @Test(timeout = 2000)
+    public void LongestIncreasingSubsequenceTask5FirstTest() throws Exception {
+        final int[] inputSequence = new int[]{
+                5, 1, 3, 2, 6, 8
+        };
+        final int expectedResult = 2;
+        int actualResults = inputSequence.length - LongestIncreasingSubsequence.getLongestIncreasingSubsequenceLength(inputSequence);
+        assertTrue("Longest Increasing Subsequence Task 5 First Test failed", Integer.compare(expectedResult, actualResults) == 0);
+
+    }
+
+    @Test(timeout = 2000)
+    public void LongestIncreasingSubsequenceTask5SecondTest() throws Exception {
+        final int[] inputSequence = new int[]{
+                1, 4, 7, 2, 5, 9, 10, 3, 15
+        };
+        final int expectedResult = 3;
+        int actualResults = inputSequence.length - LongestIncreasingSubsequence.getLongestIncreasingSubsequenceLength(inputSequence);
+        assertTrue("Longest Increasing Subsequence Task 5 Second Test failed", Integer.compare(expectedResult, actualResults) == 0);
 
     }
 
