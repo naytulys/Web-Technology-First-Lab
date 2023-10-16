@@ -3,12 +3,20 @@ package JUnitTests;
 import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
+import check.PrimeChecker;
+import entity.Ball;
+import entity.BallsColors;
+import entity.BasketOfBalls;
 import entity.Point;
+import generation.MatrixGenerator;
+import merge.IncreaseSequencesMerger;
 import org.junit.Test;
+import search.LongestIncreasingSubsequence;
+import sort.CustomSortingAlgorithm;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("all")
@@ -95,7 +103,7 @@ public class TestsFromFirstToFifthTasks {
             }
             double substract = actualResults.get(entry.getKey()) - entry.getValue();
             substract = Math.abs(substract);
-            if (Double.compare(substract, 10e-4) > 0){
+            if (Double.compare(substract, 10e-4) > 0) {
                 result = -2;
             }
         }
@@ -125,7 +133,7 @@ public class TestsFromFirstToFifthTasks {
             }
             double substract = actualResults.get(entry.getKey()) - entry.getValue();
             substract = Math.abs(substract);
-            if (Double.compare(substract, 10e-4) > 0){
+            if (Double.compare(substract, 10e-4) > 0) {
                 result = -2;
             }
         }
@@ -134,4 +142,126 @@ public class TestsFromFirstToFifthTasks {
         assertTrue("tangent Function By Steps Task 3 failed", result == 0);
     }
 
+    @Test(timeout = 2000)
+    public void primesPositionsInArrayTask4FirstTest() throws Exception {
+        final int[] inputArray = new int[]{
+                1, 2, 5, 9, 10, 13
+        };
+        final List<Integer> expectedResults = new ArrayList<>() {
+            {
+                add(1);
+                add(2);
+                add(5);
+            }
+        };
+        List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
+        assertArrayEquals("primes Positions In Array Task 4 First Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
+
+    @Test(timeout = 2000)
+    public void primesPositionsInArrayTask4SecondTest() throws Exception {
+        final int[] inputArray = new int[]{
+                113, 991
+        };
+        final List<Integer> expectedResults = new ArrayList<>() {
+            {
+                add(0);
+                add(1);
+            }
+        };
+        List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
+        assertArrayEquals("primes Positions In Array Task 4 Second Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
+
+    @Test(timeout = 2000)
+    public void LongestIncreasingSubsequenceTask5FirstTest() throws Exception {
+        final int[] inputSequence = new int[]{
+                5, 1, 3, 2, 6, 8
+        };
+        final int expectedResult = 2;
+        int actualResults = inputSequence.length - LongestIncreasingSubsequence.getLongestIncreasingSubsequenceLength(inputSequence);
+        assertTrue("Longest Increasing Subsequence Task 5 First Test failed", Integer.compare(expectedResult, actualResults) == 0);
+
+    }
+
+    @Test(timeout = 2000)
+    public void LongestIncreasingSubsequenceTask5SecondTest() throws Exception {
+        final int[] inputSequence = new int[]{
+                1, 4, 7, 2, 5, 9, 10, 3, 15
+        };
+        final int expectedResult = 3;
+        int actualResults = inputSequence.length - LongestIncreasingSubsequence.getLongestIncreasingSubsequenceLength(inputSequence);
+        assertTrue("Longest Increasing Subsequence Task 5 Second Test failed", Integer.compare(expectedResult, actualResults) == 0);
+
+    }
+
+    @Test(timeout = 2000)
+    public void SquareMatrixWhereRowsIsArrayLeftCircleShiftTask6() throws Exception {
+        final double[] inputArray = new double[]{
+                1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0
+        };
+        final double[][] expectedResults = new double[][]{
+                {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                {2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 1.0},
+                {3.0, 4.0, 5.0, 6.0, 7.0, 1.0, 2.0},
+                {4.0, 5.0, 6.0, 7.0, 1.0, 2.0, 3.0},
+                {5.0, 6.0, 7.0, 1.0, 2.0, 3.0, 4.0},
+                {6.0, 7.0, 1.0, 2.0, 3.0, 4.0, 5.0},
+                {7.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0},
+        };
+        double[][] actualResults = MatrixGenerator.generateMatrix(inputArray);
+        assertArrayEquals("Square Matrix Where Rows Is Array Left Circle Shift Task 6 failed", expectedResults, actualResults);
+
+    }
+
+    @Test(timeout = 2000)
+    public void CustomSortingAlgorithmTask7() throws Exception {
+        final double[] inputArray = new double[]{
+                1.0, 4.0, 7.0, 2.0, 5.0, 9.0, 10.0, 3.0, 15.0
+        };
+        final double[] expectedResults = new double[]{
+                1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 10.0, 15.0
+        };
+        CustomSortingAlgorithm.sort(inputArray);
+        boolean result = Arrays.toString(inputArray).equals(Arrays.toString(expectedResults));
+        assertTrue("Custom Sorting Algorithm Task 7 failed", result);
+    }
+
+    @Test(timeout = 2000)
+    public void mergeIncreaseSequencesInsertionPositionsTask8() throws Exception {
+        final double[] firstIncreaseSequence = new double[]{
+                1.0, 4.0, 6.0, 9.0
+        };
+        final double[] secondIncreaseSequence = new double[]{
+                2.0, 3.0, 5.0, 8.0, 11.0
+        };
+        final int[] expectedResults = new int[]{
+                1, 2, 4, 6, 8
+        };
+        int[] actualResults = IncreaseSequencesMerger.mergeIncreaseSequencesInsertionPositions(firstIncreaseSequence, secondIncreaseSequence);
+        assertArrayEquals("merge Increase Sequences Insertion Positions Task8 failed", expectedResults, actualResults);
+    }
+
+    @Test(timeout = 2000)
+    public void CustomSortingAlgorithmTask9() throws Exception {
+        BasketOfBalls basketOfBalls = new BasketOfBalls();
+        basketOfBalls.addBallInBasket(new Ball(3.5, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(1.1, BallsColors.RED));
+        basketOfBalls.addBallInBasket(new Ball(2.2, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(9.4, BallsColors.BROWN));
+        basketOfBalls.addBallInBasket(new Ball(7.2, BallsColors.WHITE));
+        basketOfBalls.addBallInBasket(new Ball(0.5, BallsColors.GREEN));
+        basketOfBalls.addBallInBasket(new Ball(5.0, BallsColors.BLUE));
+        basketOfBalls.addBallInBasket(new Ball(5.5, BallsColors.BLACK));
+        basketOfBalls.addBallInBasket(new Ball(6.4, BallsColors.BLUE));
+        final double expectedBasketWeight = 40.8;
+        final int expectedBlueBallsCount = 4;
+        double actualBasketWeight = basketOfBalls.basketWeight();
+        int actualBlueBallsCount = basketOfBalls.blueBallsInBasketAmount();
+        assertTrue("Custom Sorting Algorithm Task 9 failed",
+                Double.compare(expectedBasketWeight, actualBasketWeight) == 0 &&
+                        Integer.compare(expectedBlueBallsCount, actualBlueBallsCount) == 0);
+    }
 }
