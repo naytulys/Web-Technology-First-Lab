@@ -9,6 +9,7 @@ import entity.BallsColors;
 import entity.BasketOfBalls;
 import entity.Point;
 import generation.MatrixGenerator;
+import merge.IncreaseSequencesMerger;
 import org.junit.Test;
 import sort.CustomSortingAlgorithm;
 
@@ -203,6 +204,21 @@ public class TestsFromFirstToFifthTasks {
         CustomSortingAlgorithm.sort(inputArray);
         boolean result = Arrays.toString(inputArray).equals(Arrays.toString(expectedResults));
         assertTrue("Custom Sorting Algorithm Task 7 failed", result);
+    }
+
+    @Test(timeout = 2000)
+    public void mergeIncreaseSequencesInsertionPositionsTask8() throws Exception {
+        final double[] firstIncreaseSequence = new double[]{
+                1.0, 4.0, 6.0, 9.0
+        };
+        final double[] secondIncreaseSequence = new double[]{
+                2.0, 3.0, 5.0, 8.0, 11.0
+        };
+        final int[] expectedResults = new int[]{
+                1, 2, 4, 6, 8
+        };
+        int[] actualResults = IncreaseSequencesMerger.mergeIncreaseSequencesInsertionPositions(firstIncreaseSequence, secondIncreaseSequence);
+        assertArrayEquals("merge Increase Sequences Insertion Positions Task8 failed", expectedResults, actualResults);
     }
 
     @Test(timeout = 2000)
