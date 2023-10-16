@@ -197,9 +197,8 @@ public class TestsFromFirstToFifthTasks {
         final double[] expectedResults = new double[]{
                 1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 10.0, 15.0
         };
-        double[] actualResults = CustomSortingAlgorithm.sort(inputArray);
-        System.out.println(Arrays.toString(actualResults));
-        boolean result = Arrays.toString(actualResults).equals(Arrays.toString(expectedResults));
+        CustomSortingAlgorithm.sort(inputArray);
+        boolean result = Arrays.toString(inputArray).equals(Arrays.toString(expectedResults));
         assertTrue("Custom Sorting Algorithm Task 7 failed", result);
     }
 }

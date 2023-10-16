@@ -3,17 +3,15 @@ package sort;
 import java.util.Arrays;
 
 public class CustomSortingAlgorithm {
-    public static double[] sort(double[] array) {
-        double[] copiedArray = Arrays.copyOf(array, array.length);
-        for (int i = 0; i < copiedArray.length - 1;) {
-            if (copiedArray[i] > copiedArray[i + 1]) {
-                swap(copiedArray, i, i + 1);
+    public static void sort(double[] array) {
+        for (int i = 0; i < array.length - 1;) {
+            if (array[i] > array[i + 1]) {
+                swap(array, i, i + 1);
                 i = backward(i);
             } else {
                 i = forward(i);
             }
         }
-        return copiedArray;
     }
 
     private static int forward(int i) {
