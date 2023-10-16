@@ -3,12 +3,16 @@ package JUnitTests;
 import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
+import check.PrimeChecker;
 import entity.Point;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("all")
@@ -95,7 +99,7 @@ public class TestsFromFirstToFifthTasks {
             }
             double substract = actualResults.get(entry.getKey()) - entry.getValue();
             substract = Math.abs(substract);
-            if (Double.compare(substract, 10e-4) > 0){
+            if (Double.compare(substract, 10e-4) > 0) {
                 result = -2;
             }
         }
@@ -125,7 +129,7 @@ public class TestsFromFirstToFifthTasks {
             }
             double substract = actualResults.get(entry.getKey()) - entry.getValue();
             substract = Math.abs(substract);
-            if (Double.compare(substract, 10e-4) > 0){
+            if (Double.compare(substract, 10e-4) > 0) {
                 result = -2;
             }
         }
@@ -134,4 +138,36 @@ public class TestsFromFirstToFifthTasks {
         assertTrue("tangent Function By Steps Task 3 failed", result == 0);
     }
 
+    @Test(timeout = 2000)
+    public void primesPositionsInArrayTask4FirstTest() throws Exception {
+        final int[] inputArray = new int[]{
+                1, 2, 5, 9, 10, 13
+        };
+        final List<Integer> expectedResults = new ArrayList<>() {
+            {
+                add(1);
+                add(2);
+                add(5);
+            }
+        };
+        List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
+        assertArrayEquals("primes Positions In Array Task 4 First Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
+
+    @Test(timeout = 2000)
+    public void primesPositionsInArrayTask4SecondTest() throws Exception {
+        final int[] inputArray = new int[]{
+                113, 991
+        };
+        final List<Integer> expectedResults = new ArrayList<>() {
+            {
+                add(0);
+                add(1);
+            }
+        };
+        List<Integer> actualResults = PrimeChecker.getPrimesPositionsInArray(inputArray);
+        assertArrayEquals("primes Positions In Array Task 4 Second Test failed", expectedResults.toArray(), actualResults.toArray());
+
+    }
 }
