@@ -12,6 +12,7 @@ import search.LongestIncreasingSubsequence;
 import sort.CustomSortingAlgorithm;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -360,5 +361,29 @@ public class TestsFromFirstToFifthTasks {
             result = result && cloneBook.toString().equals(books.get(i).toString());
         }
         assertTrue("Book Clone Methods Test Task 14 failed", result);
+    }
+
+    @Test(timeout = 2000)
+    public void ComparableBookTask15() throws Exception {
+        final List<ComparableBook> comparableBooks = new ArrayList<>();
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 142, 125));
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 143, 15));
+        comparableBooks.add(new ComparableBook("My first book", "Mashaa", 142, 73));
+        comparableBooks.add(new ComparableBook("My_first_book", "Masha", 142, 10));
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 142, 1));
+
+        final List<ComparableBook> expectedSortResult = new ArrayList<>() {
+            {
+                add(new ComparableBook("My first book", "Masha", 142, 1));
+                add(new ComparableBook("My_first_book", "Masha", 142, 10));
+                add(new ComparableBook("My first book", "Masha", 143, 15));
+                add(new ComparableBook("My first book", "Mashaa", 142, 73));
+                add(new ComparableBook("My first book", "Masha", 142, 125));
+            }
+        };
+
+        List<ComparableBook> actualSortResult = comparableBooks.stream().sorted().collect(Collectors.toList());
+
+        assertArrayEquals("Comparable Book Task 15 failed", expectedSortResult.toArray(), actualSortResult.toArray());
     }
 }

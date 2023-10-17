@@ -21,9 +21,9 @@ public class ProgrammerBook extends Book {
     @Override
     public String toString() {
         String result = super.toString();
-        result = result  + " Language = " + language
+        result = result + " Language = " + language
                 + " Level = " + level;
-       return result;
+        return result;
     }
 
     @Override
