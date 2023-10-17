@@ -1,5 +1,8 @@
 package JUnitTests;
 
+import Comparator.BookComparatorByAuthor;
+import Comparator.BookComparatorByTitle;
+import Comparator.BookComparatorByPrice;
 import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
@@ -385,5 +388,126 @@ public class TestsFromFirstToFifthTasks {
         List<ComparableBook> actualSortResult = comparableBooks.stream().sorted().collect(Collectors.toList());
 
         assertArrayEquals("Comparable Book Task 15 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByTitleTask16() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My ds book", "ZARA", 142));
+        books.add(new Book("My sdf book", "GTR", 143));
+        books.add(new Book("My z book", "Mashaa", 142));
+        books.add(new Book("My d book", "ASD", 142));
+        books.add(new Book("My a book", "ABD", 142));
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My a book", "ABD", 142));
+                add(new Book("My d book", "ASD", 142));
+                add(new Book("My ds book", "ZARA", 142));
+                add(new Book("My sdf book", "GTR", 143));
+                add(new Book("My z book", "Mashaa", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByTitle).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Title Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByTitleThenComparingByAuthorTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "ZARA", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "Masha", 142));
+                add(new Book("My A book", "Alea", 142));
+                add(new Book("My A book", "GTR", 143));
+            }
+        };
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My A book", "Alea", 142));
+                add(new Book("My A book", "GTR", 143));
+                add(new Book("My A book", "Masha", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ZARA", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByTitle.thenComparing(bookComparatorByAuthor)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Title Then Comparing By Author Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByAuthorThenComparingByTitleTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "Stas", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "Stas", 142));
+                add(new Book("My A book", "ALea", 142));
+                add(new Book("My B book", "Stas", 143));
+            }
+        };
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "ALea", 142));
+                add(new Book("My Z book", "ASD", 142));
+
+                add(new Book("My A book", "Stas", 142));
+                add(new Book("My B book", "Stas", 143));
+                add(new Book("My Z book", "Stas", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByAuthor.thenComparing(bookComparatorByTitle)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Author Then Comparing By Title Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByAuthorThenComparingByTitleThenComparingByPriceTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "STAS", 100));
+                add(new Book("My A book", "STAS", 100));
+                add(new Book("My Z book", "STAA", 100));
+                add(new Book("My Z book", "STAS", 99));
+
+            }
+        };
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "STAA", 100));
+                add(new Book("My A book", "STAS", 100));
+                add(new Book("My Z book", "STAS", 99));
+                add(new Book("My Z book", "STAS", 100));
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+        BookComparatorByPrice bookComparatorByPrice = new BookComparatorByPrice();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByAuthor.thenComparing(bookComparatorByTitle).thenComparing(bookComparatorByPrice)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Author Then Comparing By Title Then Comparing by Price Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
     }
 }
