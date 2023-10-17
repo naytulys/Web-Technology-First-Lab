@@ -1,13 +1,13 @@
 package JUnitTests;
 
+import Comparator.BookComparatorByAuthor;
+import Comparator.BookComparatorByTitle;
+import Comparator.BookComparatorByPrice;
 import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
 import check.PrimeChecker;
-import entity.Ball;
-import entity.BallsColors;
-import entity.BasketOfBalls;
-import entity.Point;
+import entity.*;
 import generation.MatrixGenerator;
 import merge.IncreaseSequencesMerger;
 import org.junit.Test;
@@ -15,6 +15,7 @@ import search.LongestIncreasingSubsequence;
 import sort.CustomSortingAlgorithm;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -263,5 +264,250 @@ public class TestsFromFirstToFifthTasks {
         assertTrue("Custom Sorting Algorithm Task 9 failed",
                 Double.compare(expectedBasketWeight, actualBasketWeight) == 0 &&
                         Integer.compare(expectedBlueBallsCount, actualBlueBallsCount) == 0);
+    }
+
+    @Test(timeout = 2000)
+    public void BookHashCodeMethodsTestTask12() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My first book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 143));
+        books.add(new Book("My first book", "Mashaa", 142));
+        books.add(new Book("My_first_book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 142));
+
+        boolean[] expectedHashCodesEquals = new boolean[]{
+                true, false, false, false, true
+        };
+        boolean[] actualHashCodesEquals = new boolean[expectedHashCodesEquals.length];
+        Book comparationBook = books.get(0);
+        for (int i = 0; i < books.size(); i++) {
+            actualHashCodesEquals[i] = Integer.compare(comparationBook.hashCode(), books.get(i).hashCode()) == 0;
+        }
+        assertArrayEquals("Book Hash Code Methods Test Task 12 failed", expectedHashCodesEquals, actualHashCodesEquals);
+    }
+
+    @Test(timeout = 2000)
+    public void BookEqualMethodsTestTask12() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My first book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 143));
+        books.add(new Book("My first book", "Mashaa", 142));
+        books.add(new Book("My_first_book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 142));
+
+        boolean[] expectedEqualResults = new boolean[]{
+                true, false, false, false, true
+        };
+        boolean[] actualEqualResults = new boolean[expectedEqualResults.length];
+        Book comparationBook = books.get(0);
+        for (int i = 0; i < books.size(); i++) {
+            actualEqualResults[i] = comparationBook.equals(books.get(i));
+        }
+        assertArrayEquals("Book Equals Methods Test Task 12 failed", expectedEqualResults, actualEqualResults);
+    }
+
+    @Test(timeout = 2000)
+    public void ProgrammerBookHashCodeMethodsTestTask13() throws Exception {
+        List<ProgrammerBook> programmerBooks = new ArrayList<>();
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Jav", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildta", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 201, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "english", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 101));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        boolean[] expectedHashCodesEquals = new boolean[]{
+                true, false, false, false, false, false, true
+        };
+        boolean[] actualHashCodesEquals = new boolean[expectedHashCodesEquals.length];
+        ProgrammerBook comparationProgBook = programmerBooks.get(0);
+        for (int i = 0; i < programmerBooks.size(); i++) {
+            actualHashCodesEquals[i] = Integer.compare(comparationProgBook.hashCode(), programmerBooks.get(i).hashCode()) == 0;
+        }
+        assertArrayEquals("Programmer Book Hash Code Methods Test Task 13 failed", expectedHashCodesEquals, actualHashCodesEquals);
+    }
+
+    @Test(timeout = 2000)
+    public void ProgrammerBookEqualMethodsTestTask13() throws Exception {
+        List<ProgrammerBook> programmerBooks = new ArrayList<>();
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Jav", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildta", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 201, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "english", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 101));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        boolean[] expectedEqualResults = new boolean[]{
+                true, false, false, false, false, false, true
+        };
+        boolean[] actualEqualResults = new boolean[expectedEqualResults.length];
+        Book comparationProgBook = programmerBooks.get(0);
+        for (int i = 0; i < programmerBooks.size(); i++) {
+            actualEqualResults[i] = comparationProgBook.equals(programmerBooks.get(i));
+        }
+        assertArrayEquals("Programmer Book Equals Methods Test Task 13 failed", expectedEqualResults, actualEqualResults);
+    }
+
+    @Test(timeout = 2000)
+    public void BookCloneMethodsTestTask14() throws Exception {
+        List<BookWithCloneMethodImplementation> books = new ArrayList<>();
+        books.add(new BookWithCloneMethodImplementation("My first book", "Masha", 142));
+        books.add(new BookWithCloneMethodImplementation("My first book", "Masha", 143));
+        books.add(new BookWithCloneMethodImplementation("My first book", "Mashaa", 142));
+        books.add(new BookWithCloneMethodImplementation("My_first_book", "Masha", 142));
+        books.add(new BookWithCloneMethodImplementation("My first book", "Masha", 142));
+        boolean result = true;
+        for (int i = 0; i < books.size(); i++) {
+            BookWithCloneMethodImplementation cloneBook = books.get(i).clone();
+            result = result && cloneBook.equals(books.get(i));
+            result = result && cloneBook.hashCode() == books.get(i).hashCode();
+            result = result && cloneBook.toString().equals(books.get(i).toString());
+        }
+        assertTrue("Book Clone Methods Test Task 14 failed", result);
+    }
+
+    @Test(timeout = 2000)
+    public void ComparableBookTask15() throws Exception {
+        final List<ComparableBook> comparableBooks = new ArrayList<>();
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 142, 125));
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 143, 15));
+        comparableBooks.add(new ComparableBook("My first book", "Mashaa", 142, 73));
+        comparableBooks.add(new ComparableBook("My_first_book", "Masha", 142, 10));
+        comparableBooks.add(new ComparableBook("My first book", "Masha", 142, 1));
+
+        final List<ComparableBook> expectedSortResult = new ArrayList<>() {
+            {
+                add(new ComparableBook("My first book", "Masha", 142, 1));
+                add(new ComparableBook("My_first_book", "Masha", 142, 10));
+                add(new ComparableBook("My first book", "Masha", 143, 15));
+                add(new ComparableBook("My first book", "Mashaa", 142, 73));
+                add(new ComparableBook("My first book", "Masha", 142, 125));
+            }
+        };
+
+        List<ComparableBook> actualSortResult = comparableBooks.stream().sorted().collect(Collectors.toList());
+
+        assertArrayEquals("Comparable Book Task 15 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByTitleTask16() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My ds book", "ZARA", 142));
+        books.add(new Book("My sdf book", "GTR", 143));
+        books.add(new Book("My z book", "Mashaa", 142));
+        books.add(new Book("My d book", "ASD", 142));
+        books.add(new Book("My a book", "ABD", 142));
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My a book", "ABD", 142));
+                add(new Book("My d book", "ASD", 142));
+                add(new Book("My ds book", "ZARA", 142));
+                add(new Book("My sdf book", "GTR", 143));
+                add(new Book("My z book", "Mashaa", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByTitle).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Title Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByTitleThenComparingByAuthorTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "ZARA", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "Masha", 142));
+                add(new Book("My A book", "Alea", 142));
+                add(new Book("My A book", "GTR", 143));
+            }
+        };
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My A book", "Alea", 142));
+                add(new Book("My A book", "GTR", 143));
+                add(new Book("My A book", "Masha", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ZARA", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByTitle.thenComparing(bookComparatorByAuthor)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Title Then Comparing By Author Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByAuthorThenComparingByTitleTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "Stas", 142));
+                add(new Book("My Z book", "ASD", 142));
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "Stas", 142));
+                add(new Book("My A book", "ALea", 142));
+                add(new Book("My B book", "Stas", 143));
+            }
+        };
+
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "ABD", 142));
+                add(new Book("My A book", "ALea", 142));
+                add(new Book("My Z book", "ASD", 142));
+
+                add(new Book("My A book", "Stas", 142));
+                add(new Book("My B book", "Stas", 143));
+                add(new Book("My Z book", "Stas", 142));
+
+
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByAuthor.thenComparing(bookComparatorByTitle)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Author Then Comparing By Title Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
+    }
+
+    @Test(timeout = 2000)
+    public void BookComparatorsByAuthorThenComparingByTitleThenComparingByPriceTask16() throws Exception {
+        List<Book> books = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "STAS", 100));
+                add(new Book("My A book", "STAS", 100));
+                add(new Book("My Z book", "STAA", 100));
+                add(new Book("My Z book", "STAS", 99));
+
+            }
+        };
+        List<Book> expectedSortResult = new ArrayList<>() {
+            {
+                add(new Book("My Z book", "STAA", 100));
+                add(new Book("My A book", "STAS", 100));
+                add(new Book("My Z book", "STAS", 99));
+                add(new Book("My Z book", "STAS", 100));
+            }
+        };
+        BookComparatorByTitle bookComparatorByTitle = new BookComparatorByTitle();
+        BookComparatorByAuthor bookComparatorByAuthor = new BookComparatorByAuthor();
+        BookComparatorByPrice bookComparatorByPrice = new BookComparatorByPrice();
+
+        List<Book> actualSortResult = books.stream().sorted(bookComparatorByAuthor.thenComparing(bookComparatorByTitle).thenComparing(bookComparatorByPrice)).collect(Collectors.toList());
+
+        assertArrayEquals("Book Comparators By Author Then Comparing By Title Then Comparing by Price Task 16 failed", expectedSortResult.toArray(), actualSortResult.toArray());
     }
 }
