@@ -301,4 +301,46 @@ public class TestsFromFirstToFifthTasks {
         }
         assertArrayEquals("Book Equals Methods Test Task 12 failed", expectedEqualResults, actualEqualResults);
     }
+
+    @Test(timeout = 2000)
+    public void ProgrammerBookHashCodeMethodsTestTask13() throws Exception {
+        List<ProgrammerBook> programmerBooks = new ArrayList<>();
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Jav", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildta", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 201, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "english", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 101));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        boolean[] expectedHashCodesEquals = new boolean[]{
+                true, false, false, false, false, false, true
+        };
+        boolean[] actualHashCodesEquals = new boolean[expectedHashCodesEquals.length];
+        ProgrammerBook comparationProgBook = programmerBooks.get(0);
+        for (int i = 0; i < programmerBooks.size(); i++) {
+            actualHashCodesEquals[i] = Integer.compare(comparationProgBook.hashCode(), programmerBooks.get(i).hashCode()) == 0;
+        }
+        assertArrayEquals("Programmer Book Hash Code Methods Test Task 13 failed", expectedHashCodesEquals, actualHashCodesEquals);
+    }
+
+    @Test(timeout = 2000)
+    public void ProgrammerBookEqualMethodsTestTask13() throws Exception {
+        List<ProgrammerBook> programmerBooks = new ArrayList<>();
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Jav", "Herbert Schildt", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildta", 200, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 201, "English", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "english", 100));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 101));
+        programmerBooks.add(new ProgrammerBook("Java", "Herbert Schildt", 200, "English", 100));
+        boolean[] expectedEqualResults = new boolean[]{
+                true, false, false, false, false, false, true
+        };
+        boolean[] actualEqualResults = new boolean[expectedEqualResults.length];
+        Book comparationProgBook = programmerBooks.get(0);
+        for (int i = 0; i < programmerBooks.size(); i++) {
+            actualEqualResults[i] = comparationProgBook.equals(programmerBooks.get(i));
+        }
+        assertArrayEquals("Programmer Book Equals Methods Test Task 13 failed", expectedEqualResults, actualEqualResults);
+    }
 }
