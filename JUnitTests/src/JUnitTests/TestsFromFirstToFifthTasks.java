@@ -343,4 +343,22 @@ public class TestsFromFirstToFifthTasks {
         }
         assertArrayEquals("Programmer Book Equals Methods Test Task 13 failed", expectedEqualResults, actualEqualResults);
     }
+
+    @Test(timeout = 2000)
+    public void BookCloneMethodsTestTask14() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My first book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 143));
+        books.add(new Book("My first book", "Mashaa", 142));
+        books.add(new Book("My_first_book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 142));
+        boolean result = true;
+        for (int i = 0; i < books.size(); i++) {
+            Book cloneBook = books.get(i).clone();
+            result = result && cloneBook.equals(books.get(i));
+            result = result && cloneBook.hashCode() == books.get(i).hashCode();
+            result = result && cloneBook.toString().equals(books.get(i).toString());
+        }
+        assertTrue("Book Clone Methods Test Task 14 failed", result);
+    }
 }
