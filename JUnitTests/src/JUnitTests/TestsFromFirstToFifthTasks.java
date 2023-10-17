@@ -4,10 +4,7 @@ import calculator.ExpressionCalculator;
 import calculator.FunctionCalculator;
 import check.PointChecker;
 import check.PrimeChecker;
-import entity.Ball;
-import entity.BallsColors;
-import entity.BasketOfBalls;
-import entity.Point;
+import entity.*;
 import generation.MatrixGenerator;
 import merge.IncreaseSequencesMerger;
 import org.junit.Test;
@@ -263,5 +260,45 @@ public class TestsFromFirstToFifthTasks {
         assertTrue("Custom Sorting Algorithm Task 9 failed",
                 Double.compare(expectedBasketWeight, actualBasketWeight) == 0 &&
                         Integer.compare(expectedBlueBallsCount, actualBlueBallsCount) == 0);
+    }
+
+    @Test(timeout = 2000)
+    public void BookHashCodeMethodsTestTask12() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My first book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 143));
+        books.add(new Book("My first book", "Mashaa", 142));
+        books.add(new Book("My_first_book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 142));
+
+        boolean[] expectedHashCodesEquals = new boolean[]{
+                true, false, false, false, true
+        };
+        boolean[] actualHashCodesEquals = new boolean[expectedHashCodesEquals.length];
+        Book comparationBook = books.get(0);
+        for (int i = 0; i < books.size(); i++) {
+            actualHashCodesEquals[i] = Integer.compare(comparationBook.hashCode(), books.get(i).hashCode()) == 0;
+        }
+        assertArrayEquals("Book Hash Code Methods Test Task 12 failed", expectedHashCodesEquals, actualHashCodesEquals);
+    }
+
+    @Test(timeout = 2000)
+    public void BookEqualMethodsTestTask12() throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("My first book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 143));
+        books.add(new Book("My first book", "Mashaa", 142));
+        books.add(new Book("My_first_book", "Masha", 142));
+        books.add(new Book("My first book", "Masha", 142));
+
+        boolean[] expectedEqualResults = new boolean[]{
+                true, false, false, false, true
+        };
+        boolean[] actualEqualResults = new boolean[expectedEqualResults.length];
+        Book comparationBook = books.get(0);
+        for (int i = 0; i < books.size(); i++) {
+            actualEqualResults[i] = comparationBook.equals(books.get(i));
+        }
+        assertArrayEquals("Book Equals Methods Test Task 12 failed", expectedEqualResults, actualEqualResults);
     }
 }
