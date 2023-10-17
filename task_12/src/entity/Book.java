@@ -6,7 +6,7 @@ public class Book {
     private int price;
     private static int edition;
 
-    private Book() {
+    public Book() {
 
     }
     public Book(String title, String author, int price) {
@@ -25,6 +25,18 @@ public class Book {
 
     public int getPrice() {
         return price;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override
@@ -53,14 +65,5 @@ public class Book {
         hash = 191 * hash + (this.author != null ? this.author.hashCode() : 0);
         hash = 191 * hash + this.price;
         return hash;
-    }
-
-    @Override
-    public Book clone() {
-        Book book = new Book();
-        book.title = this.title;
-        book.author = this.author;
-        book.price = this.price;
-        return book;
     }
 }
